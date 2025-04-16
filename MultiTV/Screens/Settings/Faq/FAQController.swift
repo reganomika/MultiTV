@@ -56,8 +56,7 @@ final class FAQController: BaseController {
     }
     
     @objc private func close() {
-        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-        pop()
+        dismiss(animated: false)
     }
 }
 

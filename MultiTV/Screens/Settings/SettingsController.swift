@@ -143,7 +143,7 @@ extension SettingsController: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func presentFaq() {
-        push(vc: FAQController())
+        present(vc: FAQController(), animated: false)
     }
     
     private func presentIconSelection() {
