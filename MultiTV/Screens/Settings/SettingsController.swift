@@ -143,7 +143,7 @@ extension SettingsController: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func presentFaq() {
-        presentCrossDissolve(vc: ReviewController())
+        push(vc: FAQController())
     }
     
     private func presentIconSelection() {
