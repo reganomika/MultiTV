@@ -1,0 +1,132 @@
+{
+  "originHash" : "3a85a3f8783e7517c314d1cfcb9b4b52453c0392938e495cfe8f11d1a426b07a",
+  "pins" : [
+    {
+      "identity" : "apphudsdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apphud/ApphudSDK.git",
+      "state" : {
+        "revision" : "a4d2b93384cc67fa6a853465ff345be6f84b0a72",
+        "version" : "3.6.2"
+      }
+    },
+    {
+      "identity" : "customblureffectview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/perfectdim/CustomBlurEffectView",
+      "state" : {
+        "revision" : "a25e92fc90c0df9bdf79177974ba8581ea470905",
+        "version" : "0.0.3"
+      }
+    },
+    {
+      "identity" : "customnavigationview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/CustomNavigationView",
+      "state" : {
+        "revision" : "df50f1d61ccd442a710162411e4a4d95c5ae0e6c",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "lottie-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-spm",
+      "state" : {
+        "revision" : "8c6edf4f0fa84fe9c058600a4295eb0c01661c69",
+        "version" : "4.5.1"
+      }
+    },
+    {
+      "identity" : "premiummanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/PremiumManager",
+      "state" : {
+        "revision" : "a859bac8113304fbe2f74491fb9514f2b63ebc15",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "5dd1907d64f0d36f158f61a466bab75067224893",
+        "version" : "6.9.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage",
+      "state" : {
+        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
+        "version" : "5.21.0"
+      }
+    },
+    {
+      "identity" : "shadowimagebutton",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/ShadowImageButton",
+      "state" : {
+        "revision" : "34763fe7d112958752c0c42f082e18a8a55a6f9f",
+        "version" : "1.1.3"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "c6bfd1af48efcc9a9ad203665db12375ba6b145a"
+      }
+    },
+    {
+      "identity" : "storagemanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/StorageManager",
+      "state" : {
+        "revision" : "41aac22b8681db69f32da5ee49a13697c80815d1",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "tvcommanderkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wdesimini/TVCommanderKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c92038583e58a4d3d1cba229b13dd39906519686"
+      }
+    },
+    {
+      "identity" : "tvremotecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/TVRemoteControl",
+      "state" : {
+        "branch" : "lg",
+        "revision" : "c6a1177a5230b753c40627f50ed72615d1bee6a4"
+      }
+    },
+    {
+      "identity" : "utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/Utilities",
+      "state" : {
+        "revision" : "d9618bf2443987b310e6272a783f1a55934d36cb",
+        "version" : "1.0.3"
+      }
+    }
+  ],
+  "version" : 3
+}

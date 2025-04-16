@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIUserInterfaceStyle</key>
+	<string>Dark</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Permission to access the local network is required to search for your Fire Stick device.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Hellix-Bold.ttf</string>
+		<string>Hellix-Regular.ttf</string>
+		<string>Hellix-Medium.ttf</string>
+		<string>Hellix-Black.ttf</string>
+		<string>Hellix-SemiBold.ttf</string>
+		<string>Hellix-ExtraBold.ttf</string>
+		<string>Hellix-Light.ttf</string>
+	</array>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_lnp._tcp.</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>

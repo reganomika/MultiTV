@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3487D8912DAFA50F00C52669 /* TVRemoteControl in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8902DAFA50F00C52669 /* TVRemoteControl */; };
+		3487D8942DAFA51900C52669 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8932DAFA51900C52669 /* SnapKit */; };
+		3487D8972DAFA52200C52669 /* ShadowImageButton in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8962DAFA52200C52669 /* ShadowImageButton */; };
+		3487D89A2DAFA52B00C52669 /* StorageManager in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8992DAFA52B00C52669 /* StorageManager */; };
+		3487D89D2DAFA53400C52669 /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D89C2DAFA53400C52669 /* Utilities */; };
+		3487D8A02DAFA54600C52669 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D89F2DAFA54600C52669 /* SDWebImage */; };
+		3487D8A32DAFA56B00C52669 /* PremiumManager in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8A22DAFA56B00C52669 /* PremiumManager */; };
+		3487D8A62DAFA59400C52669 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8A52DAFA59400C52669 /* Lottie */; };
+		3487D8AC2DAFA5AD00C52669 /* CustomNavigationView in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8AB2DAFA5AD00C52669 /* CustomNavigationView */; };
+		3487D8AF2DAFA5BA00C52669 /* CustomBlurEffectView in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8AE2DAFA5BA00C52669 /* CustomBlurEffectView */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3487D80B2DAFA4A200C52669 /* MultiTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3487D81D2DAFA4A400C52669 /* Exceptions for "MultiTV" folder in "MultiTV" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3487D80A2DAFA4A200C52669 /* MultiTV */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3487D80D2DAFA4A200C52669 /* MultiTV */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3487D81D2DAFA4A400C52669 /* Exceptions for "MultiTV" folder in "MultiTV" target */,
+			);
+			path = MultiTV;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3487D8082DAFA4A200C52669 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3487D8A32DAFA56B00C52669 /* PremiumManager in Frameworks */,
+				3487D8A02DAFA54600C52669 /* SDWebImage in Frameworks */,
+				3487D8AC2DAFA5AD00C52669 /* CustomNavigationView in Frameworks */,
+				3487D8AF2DAFA5BA00C52669 /* CustomBlurEffectView in Frameworks */,
+				3487D8912DAFA50F00C52669 /* TVRemoteControl in Frameworks */,
+				3487D8972DAFA52200C52669 /* ShadowImageButton in Frameworks */,
+				3487D89A2DAFA52B00C52669 /* StorageManager in Frameworks */,
+				3487D89D2DAFA53400C52669 /* Utilities in Frameworks */,
+				3487D8942DAFA51900C52669 /* SnapKit in Frameworks */,
+				3487D8A62DAFA59400C52669 /* Lottie in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3487D8022DAFA4A200C52669 = {
+			isa = PBXGroup;
+			children = (
+				3487D80D2DAFA4A200C52669 /* MultiTV */,
+				3487D80C2DAFA4A200C52669 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3487D80C2DAFA4A200C52669 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3487D80B2DAFA4A200C52669 /* MultiTV.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3487D80A2DAFA4A200C52669 /* MultiTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3487D81E2DAFA4A400C52669 /* Build configuration list for PBXNativeTarget "MultiTV" */;
+			buildPhases = (
+				3487D8072DAFA4A200C52669 /* Sources */,
+				3487D8082DAFA4A200C52669 /* Frameworks */,
+				3487D8092DAFA4A200C52669 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3487D80D2DAFA4A200C52669 /* MultiTV */,
+			);
+			name = MultiTV;
+			packageProductDependencies = (
+				3487D8902DAFA50F00C52669 /* TVRemoteControl */,
+				3487D8932DAFA51900C52669 /* SnapKit */,
+				3487D8962DAFA52200C52669 /* ShadowImageButton */,
+				3487D8992DAFA52B00C52669 /* StorageManager */,
+				3487D89C2DAFA53400C52669 /* Utilities */,
+				3487D89F2DAFA54600C52669 /* SDWebImage */,
+				3487D8A22DAFA56B00C52669 /* PremiumManager */,
+				3487D8A52DAFA59400C52669 /* Lottie */,
+				3487D8AB2DAFA5AD00C52669 /* CustomNavigationView */,
+				3487D8AE2DAFA5BA00C52669 /* CustomBlurEffectView */,
+			);
+			productName = MultiTV;
+			productReference = 3487D80B2DAFA4A200C52669 /* MultiTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3487D8032DAFA4A200C52669 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					3487D80A2DAFA4A200C52669 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 3487D8062DAFA4A200C52669 /* Build configuration list for PBXProject "MultiTV" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3487D8022DAFA4A200C52669;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */,
+				3487D8922DAFA51900C52669 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3487D8952DAFA52200C52669 /* XCRemoteSwiftPackageReference "ShadowImageButton" */,
+				3487D8982DAFA52B00C52669 /* XCRemoteSwiftPackageReference "StorageManager" */,
+				3487D89B2DAFA53400C52669 /* XCRemoteSwiftPackageReference "Utilities" */,
+				3487D89E2DAFA54600C52669 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				3487D8A12DAFA56B00C52669 /* XCRemoteSwiftPackageReference "PremiumManager" */,
+				3487D8A42DAFA59400C52669 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				3487D8AA2DAFA5AD00C52669 /* XCRemoteSwiftPackageReference "CustomNavigationView" */,
+				3487D8AD2DAFA5BA00C52669 /* XCRemoteSwiftPackageReference "CustomBlurEffectView" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3487D80C2DAFA4A200C52669 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3487D80A2DAFA4A200C52669 /* MultiTV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3487D8092DAFA4A200C52669 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3487D8072DAFA4A200C52669 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3487D81F2DAFA4A400C52669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MultiTV/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zakhar.example.4.MultiTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3487D8202DAFA4A400C52669 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MultiTV/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zakhar.example.4.MultiTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		3487D8212DAFA4A400C52669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3487D8222DAFA4A400C52669 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3487D8062DAFA4A200C52669 /* Build configuration list for PBXProject "MultiTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3487D8212DAFA4A400C52669 /* Debug */,
+				3487D8222DAFA4A400C52669 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3487D81E2DAFA4A400C52669 /* Build configuration list for PBXNativeTarget "MultiTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3487D81F2DAFA4A400C52669 /* Debug */,
+				3487D8202DAFA4A400C52669 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/TVRemoteControl";
+			requirement = {
+				branch = lg;
+				kind = branch;
+			};
+		};
+		3487D8922DAFA51900C52669 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		3487D8952DAFA52200C52669 /* XCRemoteSwiftPackageReference "ShadowImageButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/ShadowImageButton";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
+		3487D8982DAFA52B00C52669 /* XCRemoteSwiftPackageReference "StorageManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/StorageManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		3487D89B2DAFA53400C52669 /* XCRemoteSwiftPackageReference "Utilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/Utilities";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+		3487D89E2DAFA54600C52669 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
+		3487D8A12DAFA56B00C52669 /* XCRemoteSwiftPackageReference "PremiumManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/PremiumManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		3487D8A42DAFA59400C52669 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
+		3487D8AA2DAFA5AD00C52669 /* XCRemoteSwiftPackageReference "CustomNavigationView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/CustomNavigationView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		3487D8AD2DAFA5BA00C52669 /* XCRemoteSwiftPackageReference "CustomBlurEffectView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/perfectdim/CustomBlurEffectView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3487D8902DAFA50F00C52669 /* TVRemoteControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */;
+			productName = TVRemoteControl;
+		};
+		3487D8932DAFA51900C52669 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8922DAFA51900C52669 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		3487D8962DAFA52200C52669 /* ShadowImageButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8952DAFA52200C52669 /* XCRemoteSwiftPackageReference "ShadowImageButton" */;
+			productName = ShadowImageButton;
+		};
+		3487D8992DAFA52B00C52669 /* StorageManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8982DAFA52B00C52669 /* XCRemoteSwiftPackageReference "StorageManager" */;
+			productName = StorageManager;
+		};
+		3487D89C2DAFA53400C52669 /* Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D89B2DAFA53400C52669 /* XCRemoteSwiftPackageReference "Utilities" */;
+			productName = Utilities;
+		};
+		3487D89F2DAFA54600C52669 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D89E2DAFA54600C52669 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		3487D8A22DAFA56B00C52669 /* PremiumManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8A12DAFA56B00C52669 /* XCRemoteSwiftPackageReference "PremiumManager" */;
+			productName = PremiumManager;
+		};
+		3487D8A52DAFA59400C52669 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8A42DAFA59400C52669 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+		3487D8AB2DAFA5AD00C52669 /* CustomNavigationView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8AA2DAFA5AD00C52669 /* XCRemoteSwiftPackageReference "CustomNavigationView" */;
+			productName = CustomNavigationView;
+		};
+		3487D8AE2DAFA5BA00C52669 /* CustomBlurEffectView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3487D8AD2DAFA5BA00C52669 /* XCRemoteSwiftPackageReference "CustomBlurEffectView" */;
+			productName = CustomBlurEffectView;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3487D8032DAFA4A200C52669 /* Project object */;
+}
