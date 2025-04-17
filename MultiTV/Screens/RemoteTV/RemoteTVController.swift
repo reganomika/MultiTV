@@ -201,7 +201,7 @@ final class RemoteTVController: BaseController {
     
     @objc private func handleConnectAction() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
-//        present(vc: DevicesController())
+        presentCrossDissolve(vc: DevicesController())
     }
     
     @objc private func handleHomeButtonTap() {  }
