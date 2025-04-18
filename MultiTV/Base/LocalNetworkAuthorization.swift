@@ -38,7 +38,7 @@ public class LocalNetworkAuthorization: NSObject {
         self.browser?.start(queue: .main)
         self.netService?.publish()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if !self.isGranted {
                 self.reset()
                 self.completion?(false)

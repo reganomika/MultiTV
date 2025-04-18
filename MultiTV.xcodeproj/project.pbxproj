@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34534FBD2DB237ED0078DE6F /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 34534FBC2DB237ED0078DE6F /* Reachability */; };
 		3487D8912DAFA50F00C52669 /* TVRemoteControl in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8902DAFA50F00C52669 /* TVRemoteControl */; };
 		3487D8942DAFA51900C52669 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8932DAFA51900C52669 /* SnapKit */; };
 		3487D8972DAFA52200C52669 /* ShadowImageButton in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8962DAFA52200C52669 /* ShadowImageButton */; };
@@ -50,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3487D8A32DAFA56B00C52669 /* PremiumManager in Frameworks */,
+				34534FBD2DB237ED0078DE6F /* Reachability in Frameworks */,
 				3487D8A02DAFA54600C52669 /* SDWebImage in Frameworks */,
 				3487D8AC2DAFA5AD00C52669 /* CustomNavigationView in Frameworks */,
 				3487D8AF2DAFA5BA00C52669 /* CustomBlurEffectView in Frameworks */,
@@ -111,6 +113,7 @@
 				3487D8A52DAFA59400C52669 /* Lottie */,
 				3487D8AB2DAFA5AD00C52669 /* CustomNavigationView */,
 				3487D8AE2DAFA5BA00C52669 /* CustomBlurEffectView */,
+				34534FBC2DB237ED0078DE6F /* Reachability */,
 			);
 			productName = MultiTV;
 			productReference = 3487D80B2DAFA4A200C52669 /* MultiTV.app */;
@@ -151,6 +154,7 @@
 				3487D8A42DAFA59400C52669 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				3487D8AA2DAFA5AD00C52669 /* XCRemoteSwiftPackageReference "CustomNavigationView" */,
 				3487D8AD2DAFA5BA00C52669 /* XCRemoteSwiftPackageReference "CustomBlurEffectView" */,
+				34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3487D80C2DAFA4A200C52669 /* Products */;
@@ -394,6 +398,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/reganomika/TVRemoteControl";
@@ -477,6 +489,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		34534FBC2DB237ED0078DE6F /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
 		3487D8902DAFA50F00C52669 /* TVRemoteControl */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */;

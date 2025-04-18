@@ -5,6 +5,7 @@ import TVRemoteControl
 import ShadowImageButton
 import Utilities
 import CustomBlurEffectView
+import Reachability
 
 // MARK: - Constants
 
@@ -23,6 +24,8 @@ private enum LayoutConstants {
 // MARK: - View Controller
 
 final class DevicesController: BaseController {
+
+    private var reachability: Reachability?
         
     // MARK: - UI Components
     
@@ -119,6 +122,34 @@ final class DevicesController: BaseController {
         setupViewHierarchy()
         setupControllerConstraints()
         setupObservers()
+        
+        reachability = try? Reachability()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability?.startNotifier()
+        } catch {
+            print("could not start reachability notifier")
+        }
+        
+        LocalNetworkAuthorization().requestAuthorization { granted in
+            DispatchQueue.main.async {
+                if granted {
+                    self.viewModel.startSearch()
+                } else {
+                    self.presentCrossDissolve(vc: AccessViewController(type: .localNetwork))
+                }
+            }
+        }
+    }
+    
+    deinit {
+        reachability?.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
     }
     
     // MARK: - Private Methods
@@ -204,12 +235,6 @@ final class DevicesController: BaseController {
         viewModel.onNotFound = { [weak self] in
             self?.showNoDevicesFound()
         }
-        
-//        monitor.pathUpdateHandler = { path in
-//            if path.status == .unsatisfied {
-//                self.presentCrossDissolve(vc: AccessViewController(type: .wifi))
-//            }
-//        }
     }
     
     private func updateUI() {
@@ -298,6 +323,18 @@ final class DevicesController: BaseController {
     @objc private func handleOpenGuide() {
         generateHapticFeedback()
         presentCrossDissolve(vc: FAQController())
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            break
+        case .cellular, .unavailable:
+            self.presentCrossDissolve(vc: AccessViewController(type: .wifi))
+        }
     }
 }
 

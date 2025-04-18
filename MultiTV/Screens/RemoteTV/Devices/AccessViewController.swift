@@ -4,14 +4,12 @@ import TVRemoteControl
 import ShadowImageButton
 import Utilities
 import CustomBlurEffectView
-import Network
+import Reachability
 
 enum AccessType {
     case wifi
     case localNetwork
 }
-
-https://github.com/ashleymills/Reachability.swift
 
 // MARK: - Constants
 
@@ -31,7 +29,7 @@ private enum LayoutConstants {
 
 final class AccessViewController: BaseController {
     
-    let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
+    private var reachability: Reachability?
     
     // MARK: - UI Components
     
@@ -97,22 +95,36 @@ final class AccessViewController: BaseController {
         setupControllerConstraints()
         showUI()
         
-//        if type == .localNetwork {
-//            LocalNetworkAuthorization().requestAuthorization { granted in
-//                DispatchQueue.main.async {
-//                    if granted {
-//                        self.handleCloseAction()
-//                    }
-//                }
-//            }
-//        } else {
-//            monitor.pathUpdateHandler = { path in
-//                if path.status == .satisfied {
-//                    self.handleCloseAction()
-//                }
-//            }
-//            monitor.start(queue: DispatchQueue.global(qos: .background))
-//        }
+        if type == .localNetwork {
+            LocalNetworkAuthorization().requestAuthorization { granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        self.handleCloseAction()
+                    }
+                }
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if type == .localNetwork {
+            
+        } else {
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+            do {
+                try reachability?.startNotifier()
+            } catch {
+                print("could not start reachability notifier")
+            }
+        }
+    }
+    
+    deinit {
+        reachability?.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
     }
     
     // MARK: - Private Methods
@@ -181,5 +193,18 @@ final class AccessViewController: BaseController {
     @objc private func handleCloseAction() {
         generateHapticFeedback()
         dismiss(animated: true)
+    }
+    
+    
+    @objc func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            handleCloseAction()
+        case .cellular, .unavailable:
+            break
+        }
     }
 }
