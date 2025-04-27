@@ -8,6 +8,7 @@ final class RemoteTVController: BaseController {
     private let samsungManager = SamsungTVConnectionService.shared
     private let amazonManager = FireStickControl.shared
     private let lgManager = LGTVManager.shared
+    private let rokuManager = RokuDeviceManager.shared
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -212,6 +213,13 @@ final class RemoteTVController: BaseController {
                 self.updateUI(isConnected: isConnected)
             }
         }.store(in: &cancellables)
+        
+        rokuManager.$isConnected.sink { [weak self] isConnected in
+            guard let self, isConnected else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.updateUI(isConnected: isConnected)
+            }
+        }.store(in: &cancellables)
     }
     
     func updateUI(isConnected: Bool) {
@@ -266,7 +274,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.home)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.home, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.home)
         }
@@ -287,7 +295,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.powerToggle)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.power, ipAddress: device.address)
         case .lg:
             lgManager.sendCommand(.power)
         }
@@ -308,7 +316,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.menu)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.search, ipAddress: device.address)
         case .lg:
             showUnsupportedAlert()
         }
@@ -330,7 +338,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.enter)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.enter, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.enter)
         }
@@ -351,7 +359,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.up)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.up, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.up)
         }
@@ -372,7 +380,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.down)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.down, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.down)
         }
@@ -393,7 +401,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.left)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.left, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.left)
         }
@@ -414,7 +422,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.right)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.right, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.right)
         }
@@ -432,7 +440,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.volumeUp)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.volumeUp, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.volumeUp)
         }
@@ -449,7 +457,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.volumeDown)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.volumeDown, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.volumeDown)
         }
@@ -470,7 +478,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.returnKey)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.back, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.back)
         }
@@ -491,7 +499,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.mute)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.volumeMute, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.mute)
         }
@@ -512,7 +520,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.channelUp)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.channelUp, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.channelUp)
         }
@@ -533,7 +541,7 @@ final class RemoteTVController: BaseController {
         case .samsungTV:
             samsungManager.sendCommand(.channelDown)
         case .rokutv:
-            break
+            rokuManager.sendKeyPress(.channelDown, ipAddress: device.address)
         case .lg:
             lgManager.sendKeyCommand(.channelDown)
         }

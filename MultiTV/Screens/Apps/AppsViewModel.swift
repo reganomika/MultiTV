@@ -11,12 +11,14 @@ final class AppsViewModel {
     private let amazonManager = FireStickControl.shared
     private let samsungManager = SamsungTVConnectionService.shared
     private let lgManager = LGTVManager.shared
+    private let rokuManager = RokuDeviceManager.shared
     
     // MARK: - Properties
     
     private(set) var samsungApps: [SamsungTVApp] = SamsungTVApp.allApps()
     private(set) var amazonApps: [FireStickApp] = []
     private(set) var lgApps: [LGRemoteControlResponseApplication] = []
+    private(set) var rokuApps: [RokuApp] = []
     
     var onUpdate: (() -> Void)?
     
@@ -25,6 +27,11 @@ final class AppsViewModel {
     
     func updateLGApps(lgApps: [LGRemoteControlResponseApplication]) {
         self.lgApps = lgApps.filter({ LGApp.init(rawValue: $0.id) != .unknown })
+    }
+    
+    func updateRokuApps(apps: [RokuApp]) {
+        self.rokuApps = apps
+        self.onUpdate?()
     }
     
     func getApps(ip: String, token: String?) {
@@ -58,6 +65,14 @@ final class AppsViewModel {
         if let id = app.id {
             lgManager.sendCommand(.launchApp(appId: id))
         }
+    }
+    
+    func launchRokuApp(_ app: RokuApp) {
+        guard let device = Storage.shared.restoreConnectedDevice(), device.type == .rokutv else {
+            return
+        }
+
+        rokuManager.launchApp(withId: app.id, ipAddress: device.address)
     }
 }
 

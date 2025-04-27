@@ -20,6 +20,7 @@ final class AppsController: BaseController {
     private let samsungManager = SamsungTVConnectionService.shared
     private let amazonManager = FireStickControl.shared
     private let lgManager = LGTVManager.shared
+    private let rokuManager = RokuDeviceManager.shared
     
     // MARK: - UI Components
     
@@ -189,6 +190,21 @@ final class AppsController: BaseController {
             }
         }.store(in: &cancellables)
         
+        rokuManager.$isConnected.sink { [weak self] isConnected in
+            guard let self, isConnected else { return }
+            
+            DispatchQueue.main.async {
+                guard let device = Storage.shared.restoreConnectedDevice(), device.type == .rokutv else {
+                    return
+                }
+                self.rokuManager.fetchInstalledApps(ipAddress: device.address)
+                    .sink(receiveCompletion: { _ in }, receiveValue: { apps in
+                        self.viewModel.updateRokuApps(apps: apps)
+                    })
+                    .store(in: &self.cancellables)
+            }
+        }.store(in: &cancellables)
+        
         viewModel.onUpdate = { [weak self] in
             DispatchQueue.main.async {
                 self?.updateUI(forConnectionStatus: true)
@@ -226,7 +242,7 @@ extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .samsungTV:
             return viewModel.samsungApps.count
         case .rokutv:
-            return  0
+            return viewModel.rokuApps.count
         case .lg:
             return viewModel.lgApps.count
         }
@@ -250,7 +266,8 @@ extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, 
             let app = viewModel.samsungApps[indexPath.row]
             cell.configure(samsung: app)
         case .rokutv:
-            break
+            let app = viewModel.rokuApps[indexPath.row]
+            cell.configure(roku: app)
         case .lg:
             let app = viewModel.lgApps[indexPath.row]
             cell.configure(lg: app)

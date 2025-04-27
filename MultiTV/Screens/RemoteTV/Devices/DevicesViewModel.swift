@@ -36,6 +36,7 @@ final class DevicesViewModel {
     let amazonManager = FireStickControl.shared
     let samsungManager = SamsungTVConnectionService.shared
     let lgManager = LGTVManager.shared
+    let rokuManager = RokuDeviceManager.shared
     
     let tvSearcher = TVSearcher()
     var samsungTV: SamsungTV?
@@ -85,8 +86,12 @@ final class DevicesViewModel {
                 self.devices.append(newDevice)
                 devicesNotFound = false
                 onUpdate?()
+            } else if isRokuTV(name: device) {
+                let newDevice = Device(name: formatTVName(device), address: ip, samsungTvModel: nil, type: .rokutv, token: nil)
+                self.devices.append(newDevice)
+                devicesNotFound = false
+                onUpdate?()
             }
-
         }
         
         discoveryService.onScanFinished = { [weak self] in
@@ -195,11 +200,26 @@ final class DevicesViewModel {
     }
     
     private func connectToRoku(device: Device) {
-        
+        rokuManager.connect(to: device.address)
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    self.onConnectionError?(device)
+                }
+            }, receiveValue: { deviceInfo in
+                let newDevice = Device.init(name: deviceInfo.friendlyName, address: device.address, samsungTvModel: nil, type: .rokutv, token: nil)
+                Storage.shared.saveConnectedDevice(newDevice)
+                self.onConnected?(newDevice)
+                self.onUpdate?()
+            })
+            .store(in: &cancellables)
     }
     
     private func isLGTV(name: String) -> Bool {
         return name.lowercased().contains("lg")
+    }
+    
+    private func isRokuTV(name: String) -> Bool {
+        return name.lowercased().contains("roku")
     }
 
     private func formatTVName(_ input: String) -> String {
