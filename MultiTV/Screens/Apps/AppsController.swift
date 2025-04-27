@@ -83,15 +83,19 @@ final class AppsController: BaseController {
         $0.action = { [weak self] in self?.handleConnectAction() }
     }
     
-    private lazy var appsTableView = UITableView().apply {
-        $0.register(BaseCell.self, forCellReuseIdentifier: BaseCell.reuseID)
-        $0.delegate = self
-        $0.dataSource = self
-        $0.backgroundColor = .clear
-        $0.separatorStyle = .none
-        $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        $0.isHidden = true
-    }
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 8
+        layout.minimumLineSpacing = 8
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        collectionView.register(AppCell.self, forCellWithReuseIdentifier: "AppCell")
+        return collectionView
+    }()
     
     private let viewModel = AppsViewModel()
     private var cancellables = Set<AnyCancellable>()
@@ -118,7 +122,7 @@ final class AppsController: BaseController {
             connectionImageView,
             connectionStackView,
             connectButton,
-            appsTableView
+            collectionView
         )
         
         connectionImageView.snp.makeConstraints {
@@ -139,9 +143,10 @@ final class AppsController: BaseController {
             $0.top.equalTo(connectionStackView.snp.bottom).inset(-28)
         }
         
-        appsTableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(20)
-            $0.bottom.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(25)
+            $0.bottom.equalToSuperview()
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -162,8 +167,8 @@ final class AppsController: BaseController {
         connectionImageView.isHidden = isConnected
         connectButton.isHidden = isConnected
         connectionStackView.isHidden = isConnected
-        appsTableView.isHidden = !isConnected
-        appsTableView.reloadData()
+        collectionView.isHidden = !isConnected
+        collectionView.reloadData()
     }
     
     // MARK: - Actions
@@ -174,35 +179,33 @@ final class AppsController: BaseController {
     }
 }
 
-// MARK: - TableView Delegate & DataSource
-
-extension AppsController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.availableApps.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: BaseCell.reuseID,
-            for: indexPath
-        ) as! BaseCell
-        
-//        let app = viewModel.availableApps[indexPath.row]
-//        cell.configure(app: app)
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCell", for: indexPath) as? AppCell else {
+            return UICollectionViewCell()
+        }
+        let app = viewModel.availableApps[indexPath.row]
+        cell.configure(app: app)
         return cell
     }
-}
-
-extension AppsController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-//        let selectedApp = viewModel.availableApps[indexPath.row]
-//        
-//        viewModel.launchApplication(selectedApp)
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let availableWidth = collectionView.frame.width - 16
+        let cellWidth = (availableWidth / 3).rounded(.down)
+        
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 102
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
+        let selectedApp = viewModel.availableApps[indexPath.row]
+        
+        viewModel.launchApplication(selectedApp)
     }
 }

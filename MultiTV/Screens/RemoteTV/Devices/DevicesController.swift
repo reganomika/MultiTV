@@ -107,6 +107,7 @@ final class DevicesController: BaseController {
         $0.dataSource = self
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
         $0.contentInset = calculateContentInset()
     }
     

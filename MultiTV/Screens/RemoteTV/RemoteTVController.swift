@@ -1,7 +1,13 @@
 import UIKit
 import Utilities
+import TVRemoteControl
+import Combine
 
 final class RemoteTVController: BaseController {
+    
+    private let samsungManager = SamsungTVConnectionService.shared
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI Components
     
@@ -184,12 +190,35 @@ final class RemoteTVController: BaseController {
     }
     
     private func setupObservers() {
-//        SamsungTVConnectionService.shared.connectionStatusPublisher
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] isConnected in
-//                self?.updateUI(forConnectionStatus: isConnected)
-//            }
-//            .store(in: &cancellables)
+        samsungManager.connectionStatusPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isConnected in
+                self?.updateUI(isConnected: isConnected)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func updateUI(isConnected: Bool) {
+        
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            imageView.image = UIImage(named: "fireTv")
+        case .samsungTV:
+            imageView.image = UIImage(named: "samsungTv")
+        case .rokutv:
+            imageView.image = UIImage(named: "rokuTv")
+        case .lg:
+            imageView.image = UIImage(named: "lgTv")
+        }
+        
+    }
+    
+    deinit {
+        cancellables.forEach({ $0.cancel() })
     }
     
     private func createTransparentButton(action: Selector) -> UIButton {
@@ -204,20 +233,244 @@ final class RemoteTVController: BaseController {
         presentCrossDissolve(vc: DevicesController())
     }
     
-    @objc private func handleHomeButtonTap() {  }
-    @objc private func handlePowerButtonTap() {  }
-    @objc private func handleMenuButtonTap() {  }
+    @objc private func handleHomeButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.home)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handlePowerButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.powerToggle)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleMenuButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.menu)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
     
-    @objc private func handleCenterButtonTap() {  }
-    @objc private func handleUpButtonTap() {  }
-    @objc private func handleDownButtonTap() {  }
-    @objc private func handleLeftButtonTap() {  }
-    @objc private func handleRightButtonTap() {  }
+    @objc private func handleCenterButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.enter)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleUpButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.up)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleDownButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.down)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleLeftButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.left)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleRightButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.right)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
     
-    @objc private func handleVolPlusButtonTap() {  }
-    @objc private func handleVolMinusButtonTap() {  }
-    @objc private func handleBackButtonTap() {  }
-    @objc private func handleMuteButtonTap() {  }
-    @objc private func handleChannelUpButtonTap() {  }
-    @objc private func handleChannelDownButtonTap() {  }
+    @objc private func handleVolPlusButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.volumeUp)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleVolMinusButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.volumeDown)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleBackButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.returnKey)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleMuteButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.mute)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleChannelUpButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.channelUp)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
+    @objc private func handleChannelDownButtonTap() {
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            presentCrossDissolve(vc: DevicesController())
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            break
+        case .samsungTV:
+            samsungManager.sendCommand(.channelDown)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
+    }
 }

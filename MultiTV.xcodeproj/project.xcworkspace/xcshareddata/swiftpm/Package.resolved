@@ -1,5 +1,5 @@
 {
-  "originHash" : "6f8a64fced8668fdaa5db34c38a15a8c2ad39a4d1ed3e88df75388c2c79643a5",
+  "originHash" : "bad9bd65b4ec6c6999819bd320a3144227469d1e43ad41287c061de1310e1165",
   "pins" : [
     {
       "identity" : "apphudsdk",
@@ -119,12 +119,21 @@
       }
     },
     {
+      "identity" : "tvdiscovery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/reganomika/TVDiscovery",
+      "state" : {
+        "revision" : "e83f59562b087cb20b92b4c1b7cd57e74a6af141",
+        "version" : "1.0.2"
+      }
+    },
+    {
       "identity" : "tvremotecontrol",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/reganomika/TVRemoteControl",
       "state" : {
-        "branch" : "lg",
-        "revision" : "c6a1177a5230b753c40627f50ed72615d1bee6a4"
+        "branch" : "main",
+        "revision" : "369c55cbd3b1f40fb5a563b7c21a175f9aea96e4"
       }
     },
     {

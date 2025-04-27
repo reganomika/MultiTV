@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        FirebaseApp.configure()
         PremiumManager.shared.configure(with: .init(apiKey: Config.apphudKey, debugMode: false))
         PremiumManager.shared.fetchProducts()
+        Storage.shared.saveConnectedDevice(nil)
         
 //        if let device = LocalDataBase.shared.restoreConnectedDevice() {
 //            connectionManager.connect(to: device, appName: Config.appName, commander: nil)

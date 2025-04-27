@@ -90,11 +90,12 @@ final class DeviceCell: UITableViewCell {
         }
     }
     
-    func configure(tv: SamsungTVModel) {
+    func configure(tv: Device) {
         
-        titleLabel.text = tv.name.decodingHTMLEntities()
+        titleLabel.text = tv.name
         
-        let isConnected = SamsungTVConnectionService.shared.connectedDevice?.id == tv.id
+//        let isConnected = SamsungTVConnectionService.shared.connectedDevice?.id == tv.id
+        let isConnected = false
         
         subtitleLabel.text = isConnected ? "Synced".localized : "Not synced".localized
         subtitleLabel.textColor = isConnected ? UIColor.init(hex: "00FF51") : .white.withAlphaComponent(0.65)

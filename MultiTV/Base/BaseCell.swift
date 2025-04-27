@@ -70,17 +70,17 @@ final class BaseCell: UITableViewCell {
         leftImageView.image = type.iconAsset
     }
     
-//    func configure(app: SamsungTVApp) {
-//        titleLabel.text = app.name
-//        leftImageView.image = app.iconImage
-//        
-//        leftImageView.snp.updateConstraints { make in
-//            make.left.equalToSuperview().inset(20)
-//            make.height.width.equalTo(50)
-//        }
-//        
-//        titleLabel.snp.updateConstraints { make in
-//            make.left.equalToSuperview().inset(96)
-//        }
-//    }
+    func configure(app: SamsungTVApp) {
+        titleLabel.text = app.name
+        leftImageView.image = app.iconImage
+        
+        leftImageView.snp.updateConstraints { make in
+            make.left.equalToSuperview().inset(20)
+            make.height.width.equalTo(50)
+        }
+        
+        titleLabel.snp.updateConstraints { make in
+            make.left.equalToSuperview().inset(96)
+        }
+    }
 }
