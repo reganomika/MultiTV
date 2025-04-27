@@ -1,12 +1,13 @@
 import UIKit
 import Utilities
-import TVRemoteControl
+import UniversalTVRemote
 import Combine
 
 final class RemoteTVController: BaseController {
     
     private let samsungManager = SamsungTVConnectionService.shared
     private let amazonManager = FireStickControl.shared
+    private let lgManager = LGTVManager.shared
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -204,6 +205,13 @@ final class RemoteTVController: BaseController {
                 self.updateUI(isConnected: isConnected)
             }
         }.store(in: &cancellables)
+        
+        lgManager.$isConnected.sink { [weak self] isConnected in
+            guard let self, isConnected else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.updateUI(isConnected: isConnected)
+            }
+        }.store(in: &cancellables)
     }
     
     func updateUI(isConnected: Bool) {
@@ -224,7 +232,6 @@ final class RemoteTVController: BaseController {
         case .lg:
             imageView.image = UIImage(named: "lgTv")
         }
-        
     }
     
     deinit {
@@ -261,7 +268,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.home)
         }
     }
     @objc private func handlePowerButtonTap() {
@@ -282,7 +289,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendCommand(.power)
         }
     }
     @objc private func handleMenuButtonTap() {
@@ -303,7 +310,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            showUnsupportedAlert()
         }
     }
     
@@ -325,7 +332,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.enter)
         }
     }
     @objc private func handleUpButtonTap() {
@@ -346,7 +353,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.up)
         }
     }
     @objc private func handleDownButtonTap() {
@@ -367,7 +374,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.down)
         }
     }
     @objc private func handleLeftButtonTap() {
@@ -388,7 +395,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.left)
         }
     }
     @objc private func handleRightButtonTap() {
@@ -409,7 +416,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.right)
         }
     }
     
@@ -427,7 +434,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.volumeUp)
         }
     }
     @objc private func handleVolMinusButtonTap() {
@@ -444,7 +451,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.volumeDown)
         }
     }
     @objc private func handleBackButtonTap() {
@@ -465,7 +472,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.back)
         }
     }
     @objc private func handleMuteButtonTap() {
@@ -486,7 +493,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.mute)
         }
     }
     @objc private func handleChannelUpButtonTap() {
@@ -507,7 +514,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.channelUp)
         }
     }
     @objc private func handleChannelDownButtonTap() {
@@ -528,7 +535,7 @@ final class RemoteTVController: BaseController {
         case .rokutv:
             break
         case .lg:
-            break
+            lgManager.sendKeyCommand(.channelDown)
         }
     }
     

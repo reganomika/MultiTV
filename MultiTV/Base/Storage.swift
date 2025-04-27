@@ -1,6 +1,6 @@
 import Foundation
 import StorageManager
-import TVRemoteControl
+import UniversalTVRemote
 
 final class Storage {
 

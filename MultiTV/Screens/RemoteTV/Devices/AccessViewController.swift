@@ -1,6 +1,6 @@
 import SnapKit
 import UIKit
-import TVRemoteControl
+import UniversalTVRemote
 import ShadowImageButton
 import Utilities
 import CustomBlurEffectView

@@ -1,6 +1,6 @@
 import UIKit
 import SnapKit
-import TVRemoteControl
+import UniversalTVRemote
 import Utilities
 
 final class DeviceCell: UITableViewCell {

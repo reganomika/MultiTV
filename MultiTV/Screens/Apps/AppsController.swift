@@ -5,7 +5,7 @@ import PremiumManager
 import CustomBlurEffectView
 import Combine
 import Utilities
-import TVRemoteControl
+import UniversalTVRemote
 import ShadowImageButton
 
 private enum Constants {
@@ -19,6 +19,7 @@ final class AppsController: BaseController {
     
     private let samsungManager = SamsungTVConnectionService.shared
     private let amazonManager = FireStickControl.shared
+    private let lgManager = LGTVManager.shared
     
     // MARK: - UI Components
     
@@ -176,6 +177,18 @@ final class AppsController: BaseController {
             }
         }.store(in: &cancellables)
         
+        lgManager.$availableApps.sink { [weak self] apps in
+            guard let self else { return }
+            
+            DispatchQueue.main.async {
+                guard let device = Storage.shared.restoreConnectedDevice(), device.type == .lg else {
+                    return
+                }
+                self.viewModel.updateLGApps(lgApps: apps)
+                self.updateUI(forConnectionStatus: true)
+            }
+        }.store(in: &cancellables)
+        
         viewModel.onUpdate = { [weak self] in
             DispatchQueue.main.async {
                 self?.updateUI(forConnectionStatus: true)
@@ -215,7 +228,7 @@ extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .rokutv:
             return  0
         case .lg:
-            return  0
+            return viewModel.lgApps.count
         }
     }
     
@@ -239,7 +252,8 @@ extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .rokutv:
             break
         case .lg:
-            break
+            let app = viewModel.lgApps[indexPath.row]
+            cell.configure(lg: app)
         }
         return cell
     }
@@ -269,7 +283,8 @@ extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .rokutv:
             return
         case .lg:
-            return
+            let app = viewModel.lgApps[indexPath.row]
+            viewModel.launchLGApp(app)
         }
     }
 }

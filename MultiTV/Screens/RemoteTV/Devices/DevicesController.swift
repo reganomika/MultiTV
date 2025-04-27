@@ -1,7 +1,7 @@
 import SnapKit
 import Network
 import UIKit
-import TVRemoteControl
+import UniversalTVRemote
 import ShadowImageButton
 import Utilities
 import CustomBlurEffectView
@@ -298,14 +298,14 @@ final class DevicesController: BaseController {
         self.present(errorAlert, animated: true, completion: nil)
     }
     
-    private func showConnectionSuccess(device: Device) {
+    private func showConnectionSuccess(device: Device?) {
         DispatchQueue.main.async { [weak self] in
             
             self?.blurView.isHidden = false
             self?.infoView.configure(
                 image: UIImage(named: "success"),
                 title: "Synced to TV".localized,
-                subtitle: device.name
+                subtitle: device?.name
             )
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -316,14 +316,14 @@ final class DevicesController: BaseController {
         }
     }
     
-    private func showConnectingState(device: Device) {
+    private func showConnectingState(device: Device?) {
         DispatchQueue.main.async { [weak self] in
             
             self?.blurView.isHidden = false
             self?.infoView.configure(
                 image: nil,
                 title: "Syncing...".localized,
-                subtitle: device.name
+                subtitle: device?.name
             )
         }
     }

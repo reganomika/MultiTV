@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340DB09E2DBE773C002FE7B7 /* UniversalTVRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 340DB09D2DBE773C002FE7B7 /* UniversalTVRemote */; };
 		34534FBD2DB237ED0078DE6F /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 34534FBC2DB237ED0078DE6F /* Reachability */; };
-		3487D8912DAFA50F00C52669 /* TVRemoteControl in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8902DAFA50F00C52669 /* TVRemoteControl */; };
 		3487D8942DAFA51900C52669 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8932DAFA51900C52669 /* SnapKit */; };
 		3487D8972DAFA52200C52669 /* ShadowImageButton in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8962DAFA52200C52669 /* ShadowImageButton */; };
 		3487D89A2DAFA52B00C52669 /* StorageManager in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8992DAFA52B00C52669 /* StorageManager */; };
@@ -55,8 +55,8 @@
 				3487D8A02DAFA54600C52669 /* SDWebImage in Frameworks */,
 				3487D8AC2DAFA5AD00C52669 /* CustomNavigationView in Frameworks */,
 				3487D8AF2DAFA5BA00C52669 /* CustomBlurEffectView in Frameworks */,
-				3487D8912DAFA50F00C52669 /* TVRemoteControl in Frameworks */,
 				3487D8972DAFA52200C52669 /* ShadowImageButton in Frameworks */,
+				340DB09E2DBE773C002FE7B7 /* UniversalTVRemote in Frameworks */,
 				3487D89A2DAFA52B00C52669 /* StorageManager in Frameworks */,
 				3487D89D2DAFA53400C52669 /* Utilities in Frameworks */,
 				3487D8942DAFA51900C52669 /* SnapKit in Frameworks */,
@@ -103,7 +103,6 @@
 			);
 			name = MultiTV;
 			packageProductDependencies = (
-				3487D8902DAFA50F00C52669 /* TVRemoteControl */,
 				3487D8932DAFA51900C52669 /* SnapKit */,
 				3487D8962DAFA52200C52669 /* ShadowImageButton */,
 				3487D8992DAFA52B00C52669 /* StorageManager */,
@@ -114,6 +113,7 @@
 				3487D8AB2DAFA5AD00C52669 /* CustomNavigationView */,
 				3487D8AE2DAFA5BA00C52669 /* CustomBlurEffectView */,
 				34534FBC2DB237ED0078DE6F /* Reachability */,
+				340DB09D2DBE773C002FE7B7 /* UniversalTVRemote */,
 			);
 			productName = MultiTV;
 			productReference = 3487D80B2DAFA4A200C52669 /* MultiTV.app */;
@@ -144,7 +144,6 @@
 			mainGroup = 3487D8022DAFA4A200C52669;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */,
 				3487D8922DAFA51900C52669 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				3487D8952DAFA52200C52669 /* XCRemoteSwiftPackageReference "ShadowImageButton" */,
 				3487D8982DAFA52B00C52669 /* XCRemoteSwiftPackageReference "StorageManager" */,
@@ -155,6 +154,7 @@
 				3487D8AA2DAFA5AD00C52669 /* XCRemoteSwiftPackageReference "CustomNavigationView" */,
 				3487D8AD2DAFA5BA00C52669 /* XCRemoteSwiftPackageReference "CustomBlurEffectView" */,
 				34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */,
+				340DB09C2DBE773C002FE7B7 /* XCRemoteSwiftPackageReference "UniversalTVRemote" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3487D80C2DAFA4A200C52669 /* Products */;
@@ -398,19 +398,19 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		340DB09C2DBE773C002FE7B7 /* XCRemoteSwiftPackageReference "UniversalTVRemote" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reganomika/UniversalTVRemote";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
 			requirement = {
 				branch = master;
-				kind = branch;
-			};
-		};
-		3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/reganomika/TVRemoteControl";
-			requirement = {
-				branch = main;
 				kind = branch;
 			};
 		};
@@ -489,15 +489,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		340DB09D2DBE773C002FE7B7 /* UniversalTVRemote */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 340DB09C2DBE773C002FE7B7 /* XCRemoteSwiftPackageReference "UniversalTVRemote" */;
+			productName = UniversalTVRemote;
+		};
 		34534FBC2DB237ED0078DE6F /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
-		};
-		3487D8902DAFA50F00C52669 /* TVRemoteControl */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3487D88F2DAFA50F00C52669 /* XCRemoteSwiftPackageReference "TVRemoteControl" */;
-			productName = TVRemoteControl;
 		};
 		3487D8932DAFA51900C52669 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

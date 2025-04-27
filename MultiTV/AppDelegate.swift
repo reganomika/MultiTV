@@ -1,6 +1,6 @@
 import UIKit
 //import FirebaseCore
-import TVRemoteControl
+import UniversalTVRemote
 import PremiumManager
 
 @main

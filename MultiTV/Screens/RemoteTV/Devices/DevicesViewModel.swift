@@ -1,8 +1,9 @@
 import Foundation
 import UIKit
-import TVRemoteControl
+import UniversalTVRemote
 import TVCommanderKit
 import TVDiscovery
+import Combine
 
 enum DeviceType: Codable {
     case fireStick
@@ -26,16 +27,19 @@ final class DevicesViewModel {
         "_airplay._tcp."
     ]
     
+    private var cancellables = Set<AnyCancellable>()
+    
     private lazy var discoveryService = TVDiscoveryService(serviceTypes: serviceTypes)
     
     var devices: [Device] = []
     
     let amazonManager = FireStickControl.shared
+    let samsungManager = SamsungTVConnectionService.shared
+    let lgManager = LGTVManager.shared
     
     let tvSearcher = TVSearcher()
     var samsungTV: SamsungTV?
-    let connectionManager = SamsungTVConnectionService.shared
-        
+
     var connectedDevice: Device?
     
     var devicesNotFound = false
@@ -43,8 +47,8 @@ final class DevicesViewModel {
     var onCodeField: ((Device) -> Void)?
     var onUpdate: (() -> Void)?
     var onConnectionError: ((Device?) -> Void)?
-    var onConnected: ((Device) -> Void)?
-    var onConnecting: ((Device) -> Void)?
+    var onConnected: ((Device?) -> Void)?
+    var onConnecting: ((Device?) -> Void)?
     var onNotFound: (() -> Void)?
     
     init() {
@@ -95,6 +99,18 @@ final class DevicesViewModel {
                 self.onUpdate?()
             }
         }
+        
+        lgManager.$isConnected.sink { [weak self] isConnected in
+            guard let self else { return }
+            if isConnected {
+                Storage.shared.saveConnectedDevice(self.connectedDevice)
+                self.onConnected?(self.connectedDevice)
+            } else {
+                if let connectedDevice {
+                    self.onConnectionError?(connectedDevice)
+                }
+            }
+        }.store(in: &cancellables)
     }
     
     func startSearch() {
@@ -106,6 +122,8 @@ final class DevicesViewModel {
     }
     
     func connect(device: Device) {
+        
+        connectedDevice = nil
         
         switch device.type {
         case .fireStick:
@@ -136,7 +154,9 @@ final class DevicesViewModel {
     }
     
     private func connectToLG(device: Device) {
-        
+        onConnecting?(device)
+        connectedDevice = device
+        lgManager.connectToDevice(.init(name: device.name, address: device.address), clientKey: "")
     }
     
     private func connectToFireStick(device: Device) {
@@ -238,7 +258,7 @@ extension DevicesViewModel: SamsungTVDelegate {
                 }
                 
                 Storage.shared.saveConnectedDevice(connectedDevice)
-                connectionManager.connect(to: samsungDevice, appName: Config.appName, commander: samsungTV)
+                samsungManager.connect(to: samsungDevice, appName: Config.appName, commander: samsungTV)
                 onConnected?(connectedDevice)
                 onUpdate?()
             }

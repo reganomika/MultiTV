@@ -1,6 +1,6 @@
 import UIKit
 import SnapKit
-import TVRemoteControl
+import UniversalTVRemote
 import SDWebImage
 
 class AppCell: UICollectionViewCell {
@@ -35,12 +35,11 @@ class AppCell: UICollectionViewCell {
         }
     }
     
-//    func configure(with app: WebOSResponseApplication) {
-//        
-//        if let id = app.id {
-//            imageView.image = App(rawValue: id)?.image
-//        }
-//    }
+    func configure(lg: LGRemoteControlResponseApplication) {
+        if let id = lg.id {
+            imageView.image = LGApp(rawValue: id)?.image
+        }
+    }
     
     func configure(samsung: SamsungTVApp) {
         imageView.image = samsung.iconImage

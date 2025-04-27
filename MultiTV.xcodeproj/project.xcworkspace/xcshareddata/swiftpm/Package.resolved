@@ -1,5 +1,5 @@
 {
-  "originHash" : "bad9bd65b4ec6c6999819bd320a3144227469d1e43ad41287c061de1310e1165",
+  "originHash" : "a40b28d766ace51bcfa5e26a938494e8b994e4727feb61259031bdf1664d6bfd",
   "pins" : [
     {
       "identity" : "apphudsdk",
@@ -128,12 +128,12 @@
       }
     },
     {
-      "identity" : "tvremotecontrol",
+      "identity" : "universaltvremote",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/reganomika/TVRemoteControl",
+      "location" : "https://github.com/reganomika/UniversalTVRemote",
       "state" : {
         "branch" : "main",
-        "revision" : "369c55cbd3b1f40fb5a563b7c21a175f9aea96e4"
+        "revision" : "a997084c569a8f004aa991f427a8e8542a9ef6f7"
       }
     },
     {
