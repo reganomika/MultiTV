@@ -1,4 +1,5 @@
 import UIKit
+import PremiumManager
 import Utilities
 import UniversalTVRemote
 import Combine
@@ -259,9 +260,20 @@ final class RemoteTVController: BaseController {
     }
     
     @objc private func handleHomeButtonTap() {
+        
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
+        }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
         }
         
         switch device.type {
@@ -280,6 +292,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handlePowerButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -301,6 +317,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleMenuButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -323,9 +343,19 @@ final class RemoteTVController: BaseController {
     }
     
     @objc private func handleCenterButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
+        }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
         }
         
         switch device.type {
@@ -343,7 +373,12 @@ final class RemoteTVController: BaseController {
             lgManager.sendKeyCommand(.enter)
         }
     }
+    
     @objc private func handleUpButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -365,6 +400,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleDownButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -386,6 +425,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleLeftButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -407,6 +450,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleRightButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -429,6 +476,10 @@ final class RemoteTVController: BaseController {
     }
     
     @objc private func handleVolPlusButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -446,6 +497,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleVolMinusButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -463,6 +518,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleBackButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -484,6 +543,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleMuteButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -505,6 +568,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleChannelUpButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return
@@ -526,6 +593,10 @@ final class RemoteTVController: BaseController {
         }
     }
     @objc private func handleChannelDownButtonTap() {
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
         guard let device = Storage.shared.restoreConnectedDevice() else {
             presentCrossDissolve(vc: DevicesController())
             return

@@ -101,6 +101,9 @@ final class ReviewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Storage.shared.wasRevviewScreen = true
+        
         configureViewHierarchy()
         configureLayoutConstraints()
         markFeedbackAsShown()
@@ -168,7 +171,7 @@ final class ReviewController: UIViewController {
     
     private func presentAppStoreReview() {
         guard let url = URL(string: "itms-apps:itunes.apple.com/us/app/apple-store/id\(Config.appId)?action=write-review") else { return }
-        present(SFSafariViewController(url: url), animated: true)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     private func generateHapticFeedback() {

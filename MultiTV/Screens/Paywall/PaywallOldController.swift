@@ -115,12 +115,15 @@ class PaywallOldController: OnboardingController {
     @objc private func closePaywall() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
+        closeAction()
+    }
+    
+    override func closeAction() {
         if isFromOnboarding {
             replaceRootViewController(with: TabBarController())
         } else {
             dismiss()
         }
-    
     }
     
     override func nexAction() {

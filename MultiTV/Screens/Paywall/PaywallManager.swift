@@ -17,4 +17,8 @@ final class PaywallManager {
             return vc
         }
     }
+    
+    func showPaywall() {
+        UIApplication.topViewController()?.present(vc: getPaywall(isFromOnboarding: false))
+    }
 }

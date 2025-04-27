@@ -14,7 +14,7 @@ private enum LayoutConstants {
     static let shadowOffset = CGSize(width: 0, height: 4)
     static let shadowOpacity: Float = 0.6
     static let contentInsets = UIEdgeInsets(top: 0, left: 28, bottom: 61, right: 28)
-    static let headerCellHeight: CGFloat = 450
+    static let headerCellHeight: CGFloat = UIScreen.isLittleDevice ? 350 : 450
     static let deviceCellHeight: CGFloat = 91
     static let infoViewHeight: CGFloat = 240
     static let successInfoViewHeight: CGFloat = 283
@@ -369,7 +369,7 @@ final class DevicesController: BaseController {
     
     @objc private func handleOpenGuide() {
         generateHapticFeedback()
-        presentCrossDissolve(vc: FAQController())
+        present(vc: FAQController())
     }
     
     @objc func reachabilityChanged(note: Notification) {

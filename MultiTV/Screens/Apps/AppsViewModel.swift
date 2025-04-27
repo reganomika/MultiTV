@@ -128,21 +128,4 @@ enum LGApp: String, CaseIterable {
             self = .unknown
         }
     }
-    
-    var image: UIImage? {
-        switch self {
-        case .netflix:
-            return UIImage(named: "netflix")
-        case .appleTV:
-            return UIImage(named: "appleTV")
-        case .youtube:
-            return UIImage(named: "youtube")
-        case .spotify:
-            return UIImage(named: "spotify")
-        case .amazon:
-            return UIImage(named: "amazon")
-        default:
-            return UIImage(named: "placeholder")
-        }
-    }
 }

@@ -134,12 +134,11 @@ extension SettingsController: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func presentPremiumPaywall() {
-//        let vc = PaywallViewController(
-//            interactor: OnboardingInteractor(
-//                coordinator: OnboardingCoordinator(window: nil)
-//            )
-//        )
-//        present(vc: vc)
+        
+        guard PremiumManager.shared.isPremium.value else {
+            PaywallManager.shared.showPaywall()
+            return
+        }
     }
     
     private func presentFaq() {

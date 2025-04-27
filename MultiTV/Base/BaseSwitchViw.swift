@@ -13,7 +13,6 @@ class BaseSwitchView: UIView {
     
     private lazy var leftButton: UIButton = {
         let button = UIButton()
-        button.setTitle("year".localized.capitalized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .font(weight: .bold, size: 18)
         button.addTarget(self, action: #selector(leftTapped), for: .touchUpInside)
@@ -22,7 +21,6 @@ class BaseSwitchView: UIView {
     
     private lazy var rightButton: UIButton = {
         let button = UIButton()
-        button.setTitle("week".localized.capitalized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .font(weight: .bold, size: 18)
         button.addTarget(self, action: #selector(rightTapped), for: .touchUpInside)
@@ -81,6 +79,11 @@ class BaseSwitchView: UIView {
             make.top.bottom.equalToSuperview().inset(3)
             make.width.equalToSuperview().multipliedBy(0.5)
         }
+    }
+    
+    func configureViews(leftTitle: String, rightTitle: String) {
+        leftButton.setTitle(leftTitle, for: .normal)
+        rightButton.setTitle(rightTitle, for: .normal)
     }
     
     private func animateSelection(toLeft: Bool) {

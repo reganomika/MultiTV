@@ -107,8 +107,8 @@ final class DevicesViewModel {
         
         lgManager.$isConnected.sink { [weak self] isConnected in
             guard let self else { return }
-            if isConnected {
-                Storage.shared.saveConnectedDevice(self.connectedDevice)
+            if isConnected, let connectedDevice = self.connectedDevice {
+                Storage.shared.saveConnectedDevice(connectedDevice)
                 self.onConnected?(self.connectedDevice)
             } else {
                 if let connectedDevice {

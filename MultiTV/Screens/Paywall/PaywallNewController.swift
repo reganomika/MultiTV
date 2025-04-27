@@ -13,7 +13,7 @@ class PaywallNewController: OnboardingController {
     private var isLeftSelected = true {
         didSet {
             
-            self.product = isLeftSelected ? premiumManager.products.value.first : premiumManager.products.value.last
+            self.product = isLeftSelected ? leftProduct : rightProduct
            
             if let price = product?.price, let duration = product?.duration?.rawValue.localized {
                 customSubtitle = String(format: "Fast & Smooth Connection, different channels and apps for".localized, "\(price)/\(duration)")
@@ -21,8 +21,17 @@ class PaywallNewController: OnboardingController {
         }
     }
     
+    private lazy var leftProduct = premiumManager.products.value.first
+    private lazy var rightProduct = premiumManager.products.value.last
+    
     private lazy var customSwitch: BaseSwitchView = {
         let customSwitch = BaseSwitchView()
+        
+        guard let leftDuration = leftProduct?.duration?.rawValue.localized.capitalized,
+              let rightDuration = rightProduct?.duration?.rawValue.localized.capitalized else {
+            return customSwitch
+        }
+        customSwitch.configureViews(leftTitle: leftDuration, rightTitle: rightDuration)
         customSwitch.onLeftSelected = { [weak self] in
             self?.isLeftSelected = true
         }
@@ -58,7 +67,7 @@ class PaywallNewController: OnboardingController {
     
     private let premiumManager = PremiumManager.shared
     
-    private lazy var product: ApphudProduct? = premiumManager.products.value.first
+    private lazy var product: ApphudProduct? = leftProduct
     
     init(isFromOnboarding: Bool) {
         self.isFromOnboarding = isFromOnboarding
@@ -148,12 +157,15 @@ class PaywallNewController: OnboardingController {
     @objc private func closePaywall() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
+        closeAction()
+    }
+    
+    override func closeAction() {
         if isFromOnboarding {
             replaceRootViewController(with: TabBarController())
         } else {
             dismiss()
         }
-    
     }
     
     override func nexAction() {

@@ -41,7 +41,21 @@ class AppCell: UICollectionViewCell {
     
     func configure(lg: LGRemoteControlResponseApplication) {
         if let id = lg.id {
-            imageView.image = LGApp(rawValue: id)?.image
+            
+            switch id {
+            case "netflix":
+                imageView.image = UIImage(named: "netflix")
+            case "com.apple.appletv":
+                imageView.image = UIImage(named: "appleTV")
+            case "youtube.leanback.v4":
+                imageView.image = UIImage(named: "youtube")
+            case "spotify":
+                imageView.image = UIImage(named: "spotify")
+            case "amazon":
+                imageView.image = UIImage(named: "prime")
+            default:
+                imageView.image = UIImage(named: "placeholder")
+            }
         }
     }
     

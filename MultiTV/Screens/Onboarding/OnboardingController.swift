@@ -157,7 +157,7 @@ class OnboardingController: UIViewController {
         
         subtitleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).inset(-36)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(UIScreen.isBigDevice ? 54 : 30)
         }
         
         nextButton.snp.makeConstraints { make in
@@ -215,6 +215,10 @@ class OnboardingController: UIViewController {
     
     @objc private func close() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        closeAction()
+    }
+    
+    func closeAction() {
         replaceRootViewController(with: TabBarController())
     }
 }

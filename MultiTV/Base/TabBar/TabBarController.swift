@@ -30,6 +30,8 @@ final class TabBarController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Storage.shared.needSkipOnboarding = true
 
         setupView()
         setupConstraints()
