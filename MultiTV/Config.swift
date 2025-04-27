@@ -8,4 +8,5 @@ enum Config {
     static let apphudKey = "app_5WQUhh1ko4e1BUjX5XEPfQSedht6Gn"
     static let appId = ""
     static let appName = "Samsung Remote TV iOS App"
+    static let amazonApiKey = "0987654321"
 }

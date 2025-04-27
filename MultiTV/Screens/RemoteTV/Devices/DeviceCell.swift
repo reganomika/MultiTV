@@ -94,8 +94,7 @@ final class DeviceCell: UITableViewCell {
         
         titleLabel.text = tv.name
         
-//        let isConnected = SamsungTVConnectionService.shared.connectedDevice?.id == tv.id
-        let isConnected = false
+        let isConnected = Storage.shared.restoreConnectedDevice()?.address == tv.address
         
         subtitleLabel.text = isConnected ? "Synced".localized : "Not synced".localized
         subtitleLabel.textColor = isConnected ? UIColor.init(hex: "00FF51") : .white.withAlphaComponent(0.65)

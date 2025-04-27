@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 import TVRemoteControl
+import SDWebImage
 
 class AppCell: UICollectionViewCell {
     
@@ -23,7 +24,6 @@ class AppCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        backgroundColor = .lightGray
         clipsToBounds = true
         layer.cornerRadius = 10
         contentView.addSubview(imageView)
@@ -42,7 +42,11 @@ class AppCell: UICollectionViewCell {
 //        }
 //    }
     
-    func configure(app: SamsungTVApp) {
-        imageView.image = app.iconImage
+    func configure(samsung: SamsungTVApp) {
+        imageView.image = samsung.iconImage
+    }
+    
+    func configure(amazon: FireStickApp) {
+        imageView.sd_setImage(with: URL(string: amazon.iconArtSmallUri))
     }
 }

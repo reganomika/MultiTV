@@ -17,6 +17,9 @@ private enum Constants {
 
 final class AppsController: BaseController {
     
+    private let samsungManager = SamsungTVConnectionService.shared
+    private let amazonManager = FireStickControl.shared
+    
     // MARK: - UI Components
     
     private lazy var backgroundImageView: UIImageView = {
@@ -155,12 +158,30 @@ final class AppsController: BaseController {
     }
     
     private func setupObservers() {
-        SamsungTVConnectionService.shared.connectionStatusPublisher
+        samsungManager.connectionStatusPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isConnected in
                 self?.updateUI(forConnectionStatus: isConnected)
             }
             .store(in: &cancellables)
+        
+        amazonManager.$isConnected.sink { [weak self] isConnected in
+            guard let self, isConnected else { return }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                guard let device = Storage.shared.restoreConnectedDevice() else {
+                    return
+                }
+                self.viewModel.getApps(ip: device.address, token: device.token)
+            }
+        }.store(in: &cancellables)
+        
+        viewModel.onUpdate = { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateUI(forConnectionStatus: true)
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     private func updateUI(forConnectionStatus isConnected: Bool) {
@@ -181,15 +202,45 @@ final class AppsController: BaseController {
 
 extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.availableApps.count
+        
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            return 0
+        }
+        
+        switch device.type {
+        case .fireStick:
+            return viewModel.amazonApps.count
+        case .samsungTV:
+            return viewModel.samsungApps.count
+        case .rokutv:
+            return  0
+        case .lg:
+            return  0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            return UICollectionViewCell()
+        }
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCell", for: indexPath) as? AppCell else {
             return UICollectionViewCell()
         }
-        let app = viewModel.availableApps[indexPath.row]
-        cell.configure(app: app)
+        
+        switch device.type {
+        case .fireStick:
+            let app = viewModel.amazonApps[indexPath.row]
+            cell.configure(amazon: app)
+        case .samsungTV:
+            let app = viewModel.samsungApps[indexPath.row]
+            cell.configure(samsung: app)
+        case .rokutv:
+            break
+        case .lg:
+            break
+        }
         return cell
     }
     
@@ -203,9 +254,22 @@ extension AppsController: UICollectionViewDataSource, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
-
-        let selectedApp = viewModel.availableApps[indexPath.row]
         
-        viewModel.launchApplication(selectedApp)
+        guard let device = Storage.shared.restoreConnectedDevice() else {
+            return
+        }
+        
+        switch device.type {
+        case .fireStick:
+            let app = viewModel.amazonApps[indexPath.row]
+            viewModel.launchAmanzonApp(app, ip: device.address, token: device.token)
+        case .samsungTV:
+            let app = viewModel.samsungApps[indexPath.row]
+            viewModel.launchSamsungApp(app)
+        case .rokutv:
+            return
+        case .lg:
+            return
+        }
     }
 }

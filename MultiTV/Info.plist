@@ -10,6 +10,7 @@
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_lnp._tcp.</string>
+		<string>_amzn-wplay._tcp</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

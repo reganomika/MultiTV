@@ -10,14 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 //        FirebaseApp.configure()
+        FireStickControl.shared.configure(apiKey: Config.amazonApiKey)
         PremiumManager.shared.configure(with: .init(apiKey: Config.apphudKey, debugMode: false))
         PremiumManager.shared.fetchProducts()
         Storage.shared.saveConnectedDevice(nil)
         
-//        if let device = LocalDataBase.shared.restoreConnectedDevice() {
-//            connectionManager.connect(to: device, appName: Config.appName, commander: nil)
-//        }
-//        
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
 

@@ -221,20 +221,26 @@ final class DevicesController: BaseController {
             self?.updateUI()
         }
         
-        viewModel.onConnected = { [weak self] in
-            self?.showConnectionSuccess()
+        viewModel.onConnected = { [weak self] device in
+            self?.showConnectionSuccess(device: device)
         }
         
-        viewModel.onConnecting = { [weak self] in
-            self?.showConnectingState()
+        viewModel.onConnecting = { [weak self] device in
+            self?.showConnectingState(device: device)
         }
         
-        viewModel.onConnectionError = { [weak self] in
-            self?.showConnectionError()
+        viewModel.onConnectionError = { [weak self] device in
+            self?.showConnectionError(device: device)
         }
         
         viewModel.onNotFound = { [weak self] in
             self?.showNoDevicesFound()
+        }
+        
+        viewModel.onCodeField = { [weak self] device in
+            self?.showCodeField(device: device, onConnect: { code in
+                self?.viewModel.verify(code: code, device: device)
+            })
         }
     }
     
@@ -254,42 +260,82 @@ final class DevicesController: BaseController {
         }
     }
     
-    private func showConnectionSuccess() {
+    func showCodeField(title: String = "Enter PIN Code".localized, device: Device, message: String? = nil, onConnect: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "code".localized
+            textField.keyboardType = .numberPad
+            textField.textAlignment = .center
+            textField.isSecureTextEntry = false
+        }
+        
+        let connectAction = UIAlertAction(title: "Sync".localized, style: .default) { _ in
+            if let pin = alert.textFields?.first?.text, !pin.isEmpty {
+                onConnect(pin)
+            } else {
+                self.showError(message: "Code cannot be empty".localized, device: device)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { [weak self] _ in
+            self?.showConnectionError(device: device)
+        })
+        
+        alert.addAction(connectAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func showError(message: String, device: Device) {
+        let errorAlert = UIAlertController(title: "error".localized, message: message, preferredStyle: .alert)
+        errorAlert.addAction(UIAlertAction(title: "ok".localized, style: .default, handler: { [weak self] _ in
+            self?.showCodeField(device: device) { pin in
+                self?.viewModel.verify(code: pin, device: device)
+            }
+        }))
+        self.present(errorAlert, animated: true, completion: nil)
+    }
+    
+    private func showConnectionSuccess(device: Device) {
         DispatchQueue.main.async { [weak self] in
             
             self?.blurView.isHidden = false
             self?.infoView.configure(
                 image: UIImage(named: "success"),
                 title: "Synced to TV".localized,
-                subtitle: self?.viewModel.connectedDevice?.name
+                subtitle: device.name
             )
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self?.blurView.isHidden = true
+                
+                self?.dismiss()
             }
         }
     }
     
-    private func showConnectingState() {
+    private func showConnectingState(device: Device) {
         DispatchQueue.main.async { [weak self] in
             
             self?.blurView.isHidden = false
             self?.infoView.configure(
                 image: nil,
                 title: "Syncing...".localized,
-                subtitle: self?.viewModel.connectedDevice?.name
+                subtitle: device.name
             )
         }
     }
     
-    private func showConnectionError() {
+    private func showConnectionError(device: Device?) {
         DispatchQueue.main.async { [weak self] in
             
             self?.blurView.isHidden = false
             self?.infoView.configure(
                 image: UIImage(named: "error"),
                 title: "No sync".localized,
-                subtitle: self?.viewModel.connectedDevice?.name
+                subtitle: device?.name
             )
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

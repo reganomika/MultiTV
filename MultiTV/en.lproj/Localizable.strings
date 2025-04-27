@@ -42,9 +42,13 @@
 "Your phone needs to be on a Wi-Fi network" = "Your phone needs to be on\na Wi-Fi network";
 "Enable local network access to scan for and link with your TV" = "Enable local network access to scan\nfor and link with your TV";
 "Open Settings" = "Open Settings";
-"" = "";
-"" = "";
-"" = "";
+"Enter PIN Code" = "Enter PIN Code";
+"code" = "code";
+"Cancel" = "Cancel";
+"Code cannot be empty" = "Code cannot be empty";
+"Sync" = "Sync";
+"Not supported" = "Not supported";
+"This feature is not supported on your device" = "This feature is not supported on your device";
 "" = "";
 "" = "";
 "" = "";

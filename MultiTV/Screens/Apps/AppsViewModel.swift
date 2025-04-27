@@ -8,22 +8,44 @@ final class AppsViewModel {
     // MARK: - Dependencies
     
     private let appLauncher = SamsungTVAppManager()
-    private let connectionService = SamsungTVConnectionService.shared
+    private let amazonManager = FireStickControl.shared
+    private let samsungManager = SamsungTVConnectionService.shared
     
     // MARK: - Properties
     
-    private(set) var availableApps: [SamsungTVApp] = SamsungTVApp.allApps()
+    private(set) var samsungApps: [SamsungTVApp] = SamsungTVApp.allApps()
+    private(set) var amazonApps: [FireStickApp] = []
+    
+    var onUpdate: (() -> Void)?
     
     
     // MARK: - Public Methods
     
-    func launchApplication(_ app: SamsungTVApp) {
+    func getApps(ip: String, token: String?) {
+        amazonManager.getApps(
+            ip: ip,
+            token: token
+        ) { [weak self] result in
+            self?.amazonApps = (try? result.get()) ?? []
+            self?.onUpdate?()
+        }
+    }
+    
+    func launchSamsungApp(_ app: SamsungTVApp) {
         
-        if let ipAddress = SamsungTVConnectionService.shared.connectedDevice?.ipAddress {
+        if let ipAddress = samsungManager.connectedDevice?.ipAddress {
             Task {
                 try await appLauncher.launch(tvApp: app, tvIPAddress: ipAddress)
             }
         }
+    }
+    
+    func launchAmanzonApp(_ app: FireStickApp, ip: String, token: String?) {
+        amazonManager.openApp(
+            app: app,
+            ip: ip,
+            token: token
+        )
     }
 }
 

@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import TVRemoteControl
 import TVCommanderKit
 import TVDiscovery
@@ -12,9 +13,10 @@ enum DeviceType: Codable {
 
 struct Device: Codable {
     let name: String
-    let address: String?
+    let address: String
     let samsungTvModel: SamsungTVModel?
     let type: DeviceType
+    let token: String?
 }
 
 final class DevicesViewModel {
@@ -38,10 +40,11 @@ final class DevicesViewModel {
     
     var devicesNotFound = false
     
+    var onCodeField: ((Device) -> Void)?
     var onUpdate: (() -> Void)?
-    var onConnectionError: (() -> Void)?
-    var onConnected: (() -> Void)?
-    var onConnecting: (() -> Void)?
+    var onConnectionError: ((Device?) -> Void)?
+    var onConnected: ((Device) -> Void)?
+    var onConnecting: ((Device) -> Void)?
     var onNotFound: (() -> Void)?
     
     init() {
@@ -63,7 +66,7 @@ final class DevicesViewModel {
                     case .success(let deviceInfo):
                         if self.devices.map({ $0.address }).contains(ip) == false {
                             
-                            let newDevice = Device(name: deviceInfo.friendlyName, address: ip, samsungTvModel: nil, type: .fireStick)
+                            let newDevice = Device(name: deviceInfo.friendlyName, address: ip, samsungTvModel: nil, type: .fireStick, token: nil)
                             self.devices.append(newDevice)
                             devicesNotFound = false
                             onUpdate?()
@@ -74,7 +77,7 @@ final class DevicesViewModel {
                     }
                 }
             } else if isLGTV(name: device) {
-                let newDevice = Device(name: formatTVName(device), address: ip, samsungTvModel: nil, type: .lg)
+                let newDevice = Device(name: formatTVName(device), address: ip, samsungTvModel: nil, type: .lg, token: nil)
                 self.devices.append(newDevice)
                 devicesNotFound = false
                 onUpdate?()
@@ -108,20 +111,17 @@ final class DevicesViewModel {
         case .fireStick:
             connectToFireStick(device: device)
         case .samsungTV:
-            if let samsungTVDevice = device.samsungTvModel {
-                connectToSamsung(device: device)
-            }
+            connectToSamsung(device: device)
         case .rokutv:
             connectToRoku(device: device)
         case .lg:
             connectToLG(device: device)
         }
-  
     }
     
     private func connectToSamsung(device: Device) {
         guard let samsungDevice = device.samsungTvModel else {
-            onConnectionError?()
+            onConnectionError?(device)
             return
         }
         connectedDevice = device
@@ -129,9 +129,9 @@ final class DevicesViewModel {
             samsungTV = try SamsungTV(tv: samsungDevice, appName: Config.appName)
             samsungTV?.delegate = self
             samsungTV?.connectToTV()
-            onConnecting?()
+            onConnecting?(device)
         } catch {
-            onConnectionError?()
+            onConnectionError?(device)
         }
     }
     
@@ -140,7 +140,38 @@ final class DevicesViewModel {
     }
     
     private func connectToFireStick(device: Device) {
+        amazonManager.connect(ip: device.address, friendlyName: "\(UIDevice.current.name)") { [weak self] result in
+            switch result {
+            case .success:
+                self?.onCodeField?(device)
+            case .failure:
+                self?.onConnectionError?(device)
+            }
+        }
+    }
+    
+    func verify(code: String, device: Device) {
         
+        let fireStik = FireStick.init(name: device.name, ip: device.address)
+        amazonManager.verifyPin(pin: code, device: fireStik) { [weak self] result in
+            switch result {
+            case .success(let token):
+                
+                let newDevice = Device(
+                    name: device.name,
+                    address: device.address,
+                    samsungTvModel: nil,
+                    type: .fireStick,
+                    token: token
+                )
+                
+                Storage.shared.saveConnectedDevice(newDevice)
+                self?.onConnected?(newDevice)
+                self?.onUpdate?()
+            case .failure:
+                self?.onConnectionError?(device)
+            }
+        }
     }
     
     private func connectToRoku(device: Device) {
@@ -169,11 +200,21 @@ extension DevicesViewModel: TVSearchObserving {
             return
         }
         
-        let newDevice = Device(name: tv.name.decodingHTMLEntities(), address: tv.device?.ip, samsungTvModel: tv.map(), type: .samsungTV)
-        
-        devices.append(newDevice)
-        devicesNotFound = false
-        onUpdate?()
+        if let ip = tv.device?.ip {
+            
+            let newDevice = Device(
+                name: tv.name.decodingHTMLEntities(),
+                address: ip,
+                samsungTvModel: tv.map(),
+                type: .samsungTV,
+                token: nil
+            )
+            
+            devices.append(newDevice)
+            devicesNotFound = false
+            onUpdate?()
+        }
+
     }
     
     func tvSearchDidLoseTV(_ tv: TVCommanderKit.TV) {}
@@ -192,17 +233,17 @@ extension DevicesViewModel: SamsungTVDelegate {
             if let connectedDevice {
                 
                 guard let samsungDevice = connectedDevice.samsungTvModel else {
-                    onConnectionError?()
+                    onConnectionError?(connectedDevice)
                     return
                 }
                 
                 Storage.shared.saveConnectedDevice(connectedDevice)
                 connectionManager.connect(to: samsungDevice, appName: Config.appName, commander: samsungTV)
-                onConnected?()
+                onConnected?(connectedDevice)
                 onUpdate?()
             }
         case .denied, .none:
-            onConnectionError?()
+            onConnectionError?(connectedDevice)
         }
     }
     

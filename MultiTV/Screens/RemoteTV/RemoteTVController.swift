@@ -6,6 +6,7 @@ import Combine
 final class RemoteTVController: BaseController {
     
     private let samsungManager = SamsungTVConnectionService.shared
+    private let amazonManager = FireStickControl.shared
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -196,6 +197,13 @@ final class RemoteTVController: BaseController {
                 self?.updateUI(isConnected: isConnected)
             }
             .store(in: &cancellables)
+        
+        amazonManager.$isConnected.sink { [weak self] isConnected in
+            guard let self, isConnected else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.updateUI(isConnected: isConnected)
+            }
+        }.store(in: &cancellables)
     }
     
     func updateUI(isConnected: Bool) {
@@ -203,6 +211,8 @@ final class RemoteTVController: BaseController {
         guard let device = Storage.shared.restoreConnectedDevice() else {
             return
         }
+        
+        navigationTitleLabel.text = device.name
         
         switch device.type {
         case .fireStick:
@@ -241,7 +251,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "home"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.home)
         case .rokutv:
@@ -258,7 +272,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "sleep"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.powerToggle)
         case .rokutv:
@@ -275,7 +293,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "menu"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.menu)
         case .rokutv:
@@ -293,7 +315,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "select"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.enter)
         case .rokutv:
@@ -310,7 +336,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "dpad_up"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.up)
         case .rokutv:
@@ -327,7 +357,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "dpad_down"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.down)
         case .rokutv:
@@ -344,7 +378,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "dpad_left"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.left)
         case .rokutv:
@@ -361,7 +399,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "dpad_right"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.right)
         case .rokutv:
@@ -379,7 +421,7 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            showUnsupportedAlert()
         case .samsungTV:
             samsungManager.sendCommand(.volumeUp)
         case .rokutv:
@@ -396,7 +438,7 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            showUnsupportedAlert()
         case .samsungTV:
             samsungManager.sendCommand(.volumeDown)
         case .rokutv:
@@ -413,7 +455,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "back"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.returnKey)
         case .rokutv:
@@ -430,7 +476,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "mute"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.mute)
         case .rokutv:
@@ -447,7 +497,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "dpad_up"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.channelUp)
         case .rokutv:
@@ -464,7 +518,11 @@ final class RemoteTVController: BaseController {
         
         switch device.type {
         case .fireStick:
-            break
+            amazonManager.sendCommand(
+                ip: device.address,
+                token: device.token,
+                action: "dpad_down"
+            )
         case .samsungTV:
             samsungManager.sendCommand(.channelDown)
         case .rokutv:
@@ -472,5 +530,11 @@ final class RemoteTVController: BaseController {
         case .lg:
             break
         }
+    }
+    
+    func showUnsupportedAlert() {
+        let alert = UIAlertController(title: "Not supported".localized, message: "This feature is not supported on your device".localized, preferredStyle: .alert)
+        alert.addAction(.init(title: "OK", style: .default, handler: nil))
+        present(vc: alert)
     }
 }
