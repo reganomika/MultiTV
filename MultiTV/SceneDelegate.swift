@@ -1,15 +1,12 @@
-//
-//  SceneDelegate.swift
-//  MultiTV
-//
-//  Created by Zakhar Sazanavets on 16/04/2025.
-//
 
+import Utilities
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var coordinator: OnboardingCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -17,11 +14,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        window.rootViewController = TabBarController()
-        
-        window.makeKeyAndVisible()
+        if Storage.shared.needSkipOnboarding {
+            window.rootViewController = TabBarController()
+            window.makeKeyAndVisible()
+        } else {
+            
+            coordinator = OnboardingCoordinator(window: window)
+            coordinator?.start()
+        }
     }
-
-
 }
 
