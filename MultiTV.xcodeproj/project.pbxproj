@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		340DB09E2DBE773C002FE7B7 /* UniversalTVRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 340DB09D2DBE773C002FE7B7 /* UniversalTVRemote */; };
+		340DB3582DBF7CF9002FE7B7 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 340DB3572DBF7CF9002FE7B7 /* FirebaseCrashlytics */; };
 		34534FBD2DB237ED0078DE6F /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 34534FBC2DB237ED0078DE6F /* Reachability */; };
 		3487D8942DAFA51900C52669 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8932DAFA51900C52669 /* SnapKit */; };
 		3487D8972DAFA52200C52669 /* ShadowImageButton in Frameworks */ = {isa = PBXBuildFile; productRef = 3487D8962DAFA52200C52669 /* ShadowImageButton */; };
@@ -59,6 +60,7 @@
 				340DB09E2DBE773C002FE7B7 /* UniversalTVRemote in Frameworks */,
 				3487D89A2DAFA52B00C52669 /* StorageManager in Frameworks */,
 				3487D89D2DAFA53400C52669 /* Utilities in Frameworks */,
+				340DB3582DBF7CF9002FE7B7 /* FirebaseCrashlytics in Frameworks */,
 				3487D8942DAFA51900C52669 /* SnapKit in Frameworks */,
 				3487D8A62DAFA59400C52669 /* Lottie in Frameworks */,
 			);
@@ -93,6 +95,7 @@
 				3487D8072DAFA4A200C52669 /* Sources */,
 				3487D8082DAFA4A200C52669 /* Frameworks */,
 				3487D8092DAFA4A200C52669 /* Resources */,
+				340DB3C52DBF7D36002FE7B7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -114,6 +117,7 @@
 				3487D8AE2DAFA5BA00C52669 /* CustomBlurEffectView */,
 				34534FBC2DB237ED0078DE6F /* Reachability */,
 				340DB09D2DBE773C002FE7B7 /* UniversalTVRemote */,
+				340DB3572DBF7CF9002FE7B7 /* FirebaseCrashlytics */,
 			);
 			productName = MultiTV;
 			productReference = 3487D80B2DAFA4A200C52669 /* MultiTV.app */;
@@ -164,6 +168,7 @@
 				3487D8AD2DAFA5BA00C52669 /* XCRemoteSwiftPackageReference "CustomBlurEffectView" */,
 				34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */,
 				340DB09C2DBE773C002FE7B7 /* XCRemoteSwiftPackageReference "UniversalTVRemote" */,
+				340DB3562DBF7CF9002FE7B7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3487D80C2DAFA4A200C52669 /* Products */;
@@ -184,6 +189,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		340DB3C52DBF7D36002FE7B7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3487D8072DAFA4A200C52669 /* Sources */ = {
@@ -419,6 +449,14 @@
 				kind = branch;
 			};
 		};
+		340DB3562DBF7CF9002FE7B7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
 		34534FBB2DB237ED0078DE6F /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
@@ -506,6 +544,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 340DB09C2DBE773C002FE7B7 /* XCRemoteSwiftPackageReference "UniversalTVRemote" */;
 			productName = UniversalTVRemote;
+		};
+		340DB3572DBF7CF9002FE7B7 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 340DB3562DBF7CF9002FE7B7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		34534FBC2DB237ED0078DE6F /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
