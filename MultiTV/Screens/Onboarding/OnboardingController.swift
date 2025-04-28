@@ -8,8 +8,8 @@ import ShadowImageButton
 import Utilities
 
 private enum Constants {
-    static let buttonHeight: CGFloat = 64
-    static let buttonCornerRadius: CGFloat = 32
+    static let buttonHeight: CGFloat = 70
+    static let buttonCornerRadius: CGFloat = 35
     static let shadowRadius: CGFloat = 14.7
     static let shadowOffset = CGSize(width: 0, height: 4)
     static let shadowOpacity: Float = 0.6
@@ -31,7 +31,7 @@ class OnboardingController: UIViewController {
                 title: "Continue".localized,
                 font: .font(
                     weight: .bold,
-                    size: 18
+                    size: 19
                 ),
                 textColor: .white,
                 image: nil
@@ -156,8 +156,9 @@ class OnboardingController: UIViewController {
         }
         
         subtitleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(nextButton.snp.top).inset(-36)
-            make.leading.trailing.equalToSuperview().inset(UIScreen.isBigDevice ? 54 : 30)
+            make.bottom.equalTo(nextButton.snp.top).inset(-40)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(290)
         }
         
         nextButton.snp.makeConstraints { make in
@@ -175,7 +176,7 @@ class OnboardingController: UIViewController {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.setTitleColor(.white.withAlphaComponent(0.65), for: .normal)
-        button.titleLabel?.font = .font(weight: .medium, size: Locale().isEnglish ? 13 : 10)
+        button.titleLabel?.font = .font(weight: .medium, size: Locale.current.languageCode == "de" ? 10 : 13)
         return button
     }
     

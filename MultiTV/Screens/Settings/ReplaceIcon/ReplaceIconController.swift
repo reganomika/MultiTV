@@ -12,7 +12,7 @@ enum AppIcon: String, CaseIterable, Identifiable {
     var previewImage: UIImage? {
         switch self {
         case .primary: return UIImage(named: "playstore")
-        case .alternative: return UIImage(named: "playstore-1")
+        case .alternative: return UIImage(named: "playstore 1")
         }
     }
     
@@ -229,6 +229,7 @@ final class IconSelectionCell: UICollectionViewCell {
     }
     
     private func configureCellAppearance() {
+        contentView.layer.borderWidth = 5
         contentView.layer.cornerRadius = 24
         contentView.backgroundColor = .white.withAlphaComponent(0.17)
     }
@@ -240,17 +241,6 @@ final class IconSelectionCell: UICollectionViewCell {
     
     func configure(with iconImage: UIImage?, isSelected: Bool) {
         iconImageView.image = iconImage
-        
-        if isSelected {
-            contentView.applyGradientBorder(
-                colors: [UIColor(hex: "0055F1"), UIColor(hex: "0055F1")],
-                lineWidth: 8,
-                cornerRadius: 24
-            )
-        } else {
-            contentView.layer.borderColor = UIColor.clear.cgColor
-            contentView.layer.borderWidth = 1
-            contentView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
-        }
+        contentView.layer.borderColor = isSelected ? UIColor.white.cgColor : UIColor.clear.cgColor
     }
 }

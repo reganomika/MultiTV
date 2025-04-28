@@ -215,6 +215,7 @@ final class AppsController: BaseController {
     
     private func updateUI(forConnectionStatus isConnected: Bool) {
         connectionImageView.isHidden = isConnected
+        backgroundImageView.isHidden = isConnected
         connectButton.isHidden = isConnected
         connectionStackView.isHidden = isConnected
         collectionView.isHidden = !isConnected

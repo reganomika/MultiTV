@@ -56,7 +56,7 @@ final class TabBarView: UIView {
                 view.layer.cornerRadius = 36
                 
                 view.snp.makeConstraints { make in
-                    make.height.width.equalTo(72)
+                    make.height.width.equalTo(75)
                 }
                 
                 let imageView = UIImageView(image: image)
@@ -77,7 +77,7 @@ final class TabBarView: UIView {
                 stackView.add(target: self, action: #selector(tabButtonTapped(_:)))
                 
                 stackView.snp.makeConstraints { make in
-                    make.height.width.equalTo(72)
+                    make.height.width.equalTo(75)
                 }
                 
                 tabBarStackView.addArrangedSubview(stackView)
@@ -101,8 +101,8 @@ final class TabBarView: UIView {
         contentView.addSubview(tabBarStackView)
         
         tabBarStackView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(30)
-            make.height.equalTo(72)
+            make.left.right.equalToSuperview().inset(40)
+            make.height.equalTo(75)
             make.centerY.equalToSuperview()
         }
     }

@@ -6,22 +6,33 @@ import Utilities
 class PremiumCell: UITableViewCell {
     static let reuseID = "PremiumCell"
     
-    private let containerView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "premiumCell"))
+    private let containerView: UIView = {
+        let view = UIView()
         view.applyDropShadow(
             color: UIColor(hex: "0055F1"),
             opacity: 0.61,
             offset: CGSize(width: 0, height: 4),
             radius: 20
         )
+        view.backgroundColor = .init(hex: "0055F1")
+        view.layer.cornerRadius = 22
         return view
+    }()
+    
+    private let rightImageView: UIImageView = {
+        UIImageView(image: UIImage(named: "rightPremiumCell"))
     }()
     
     private let promotionTitle: UILabel = {
         let label = UILabel()
-        label.text = "Unlock full control 🔓".localized
-        label.font = .font(weight: .bold, size: 24)
-        label.textColor = .white
+        
+        label.attributedText = "Unlock full control 🔓".localized.attributedString(
+            font: .font(weight: .bold, size: 24),
+            aligment: .left,
+            color:. white,
+            lineSpacing: 5,
+            maxHeight: 50
+        )
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -29,9 +40,14 @@ class PremiumCell: UITableViewCell {
     
     private let promotionSubtitle: UILabel = {
         let label = UILabel()
-        label.text = "Get unlimited access to Universal Remote TV".localized
-        label.font = .font(weight: .semiBold, size: 16)
-        label.textColor = UIColor.white.withAlphaComponent(0.64)
+        
+        label.attributedText = "Get unlimited access to Universal Remote TV".localized.attributedString(
+            font: .font(weight: .semiBold, size: 16),
+            aligment: .left,
+            color: UIColor.white.withAlphaComponent(0.64),
+            lineSpacing: 5,
+            maxHeight: 30
+        )
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -69,12 +85,12 @@ class PremiumCell: UITableViewCell {
         contentView.backgroundColor = .clear
         
         contentView.addSubview(containerView)
-        containerView.addSubviews(promotionTitle, promotionSubtitle, actionButton)
+        containerView.addSubviews(promotionTitle, promotionSubtitle, actionButton, rightImageView)
         
         containerView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(24)
-            $0.height.equalTo(containerView.snp.width).multipliedBy(192.0/343.0)
             $0.verticalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(192)
         }
         
         promotionTitle.snp.makeConstraints {
@@ -86,13 +102,22 @@ class PremiumCell: UITableViewCell {
         promotionSubtitle.snp.makeConstraints {
             $0.leading.equalTo(actionButton)
             $0.width.equalTo(170)
-            $0.top.equalTo(promotionTitle.snp.bottom).offset(4)
+            $0.top.equalTo(promotionTitle.snp.bottom).offset(10)
         }
         
         actionButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().inset(18)
             $0.size.equalTo(CGSize(width: 110, height: 42))
+        }
+        
+        rightImageView.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.containerView.addButtonInnerShadow()
         }
     }
 }

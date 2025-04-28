@@ -1,5 +1,5 @@
 import UIKit
-//import FirebaseCore
+import FirebaseCore
 import UniversalTVRemote
 import PremiumManager
 
@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let connectionManager = SamsungTVConnectionService.shared
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         FireStickControl.shared.configure(apiKey: Config.amazonApiKey)
         PremiumManager.shared.configure(with: .init(apiKey: Config.apphudKey, debugMode: Config.debugMode))
         PremiumManager.shared.fetchProducts()

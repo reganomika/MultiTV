@@ -236,24 +236,21 @@ extension DevicesViewModel: TVSearchObserving {
     
     func tvSearchDidFindTV(_ tv: TVCommanderKit.TV) {
         
-        if devices.map({ $0.address }).contains(tv.device?.ip) {
+        if devices.map({ $0.address }).contains(tv.id) {
             return
         }
+                    
+        let newDevice = Device(
+            name: tv.name.decodingHTMLEntities(),
+            address: tv.id,
+            samsungTvModel: tv.map(),
+            type: .samsungTV,
+            token: nil
+        )
         
-        if let ip = tv.device?.ip {
-            
-            let newDevice = Device(
-                name: tv.name.decodingHTMLEntities(),
-                address: ip,
-                samsungTvModel: tv.map(),
-                type: .samsungTV,
-                token: nil
-            )
-            
-            devices.append(newDevice)
-            devicesNotFound = false
-            onUpdate?()
-        }
+        devices.append(newDevice)
+        devicesNotFound = false
+        onUpdate?()
 
     }
     

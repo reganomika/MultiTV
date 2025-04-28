@@ -301,6 +301,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             amazonManager.sendCommand(
@@ -325,6 +332,13 @@ final class RemoteTVController: BaseController {
             presentCrossDissolve(vc: DevicesController())
             return
         }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
         
         switch device.type {
         case .fireStick:
@@ -384,6 +398,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             amazonManager.sendCommand(
@@ -408,6 +429,13 @@ final class RemoteTVController: BaseController {
             presentCrossDissolve(vc: DevicesController())
             return
         }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
         
         switch device.type {
         case .fireStick:
@@ -434,6 +462,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             amazonManager.sendCommand(
@@ -458,6 +493,13 @@ final class RemoteTVController: BaseController {
             presentCrossDissolve(vc: DevicesController())
             return
         }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
         
         switch device.type {
         case .fireStick:
@@ -485,6 +527,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             showUnsupportedAlert()
@@ -506,6 +555,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             showUnsupportedAlert()
@@ -526,6 +582,13 @@ final class RemoteTVController: BaseController {
             presentCrossDissolve(vc: DevicesController())
             return
         }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
         
         switch device.type {
         case .fireStick:
@@ -552,6 +615,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             amazonManager.sendCommand(
@@ -577,6 +647,13 @@ final class RemoteTVController: BaseController {
             return
         }
         
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
+        
         switch device.type {
         case .fireStick:
             amazonManager.sendCommand(
@@ -601,6 +678,13 @@ final class RemoteTVController: BaseController {
             presentCrossDissolve(vc: DevicesController())
             return
         }
+        
+        Storage.shared.buttonsTapNumber += 1
+        
+        if Storage.shared.buttonsTapNumber > 5, !Storage.shared.wasRevviewScreen {
+            presentCrossDissolve(vc: ReviewController())
+        }
+        
         
         switch device.type {
         case .fireStick:

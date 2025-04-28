@@ -69,13 +69,13 @@ final class DeviceSearchCell: UITableViewCell {
         contentView.addSubview(centerImageView)
        
         animationView.snp.makeConstraints { make in
-            make.height.width.equalTo(UIScreen.isLittleDevice ? 200 : 276)
+            make.height.width.equalTo(UIScreen.isLittleDevice ? 230 : 276)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(connectionStackView.snp.top).inset(-40)
         }
         
         centerImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(UIScreen.isLittleDevice ? 200 : 276)
+            make.height.width.equalTo(UIScreen.isLittleDevice ? 230 : 276)
             make.center.equalTo(animationView)
         }
         

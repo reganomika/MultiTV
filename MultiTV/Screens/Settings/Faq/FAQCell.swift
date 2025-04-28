@@ -27,8 +27,6 @@ final class FAQCell: UITableViewCell {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .font(weight: .medium, size: 16)
-        label.textColor = .white
         label.numberOfLines = 0
         return label
     }()
@@ -84,11 +82,22 @@ final class FAQCell: UITableViewCell {
         
         subtitleLabel.isHidden = !isExpanded
         
+        
+        let subtitleString: String
+        
         if isExpanded {
-            subtitleLabel.text = model.subtitle
+            subtitleString = model.subtitle
         } else {
-            subtitleLabel.text = ""
+            subtitleString = ""
         }
+        
+        subtitleLabel.attributedText = subtitleString.localized.attributedString(
+            font: .font(weight: .medium, size: 16),
+            aligment: .left,
+            color: .white,
+            lineSpacing: 2,
+            maxHeight: 40
+        )
         
         rightImageView.image = isExpanded ? UIImage(named: "arrowUp") : UIImage(named: "arrowBottom")
         
